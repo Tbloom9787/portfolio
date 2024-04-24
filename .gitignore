@@ -1,0 +1,14 @@
+# Node.js
+node_modules/
+
+# Environment variables
+.env
+
+# Production build folder
+/portfolio-frontend/build/
+
+# Logs
+*.log
+
+# Operating System Files
+.DS_Store
