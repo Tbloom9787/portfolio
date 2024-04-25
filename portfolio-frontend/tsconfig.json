@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+    "target": "es2016",            // Modern enough for most browsers while ensuring compatibility
+    "module": "esnext",            // Leverage dynamic import() and other modern JS features
+    "lib": ["dom", "dom.iterable", "esnext"],  // Include typings for DOM and latest ECMAScript features
+    "jsx": "react-jsx",            // Support for the new JSX transform in React 17+
+    "esModuleInterop": true,       // Aligns with Babel's handling of ES modules
+    "moduleResolution": "node",    // Understand how Node.js resolves modules, important for npm packages
+    "allowSyntheticDefaultImports": true, // Allow default imports from modules with no default export
+    "skipLibCheck": true,          // Skip type checking of declaration files (speeds up the compilation)
+    "forceConsistentCasingInFileNames": true, // Avoid problems caused by inconsistent file casing in imports
+    "strict": true,                // Enable all strict type-checking options
+    "noEmit": true,                // Do not emit outputs (increases performance during incremental development)
+    "isolatedModules": true        // Ensure that each file can be transpiled independently, safe for Babel
+  },
+  "include": ["src/**/*"]          // Include all files in the src folder
+}
