@@ -1,0 +1,64 @@
+.home-section {
+    position: relative;
+    height: 100vh;
+    overflow: hidden;
+    background-color: #C3E0E5;
+    color: white;
+}
+
+.intro-container {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    height: 100%;
+    text-align: left;
+    padding-left: 20%;
+}
+
+.intro-text {
+    max-width: 640px;
+}
+
+.intro-greeting {
+    font-size: 1rem;
+    margin-bottom: 1rem;
+}
+
+.intro-name {
+    font-size: 4rem;
+    margin: 0;
+    font-weight: bold;
+}
+
+.intro-title {
+    font-size: 2rem;
+    margin: 0;
+    font-weight: normal;
+}
+
+.intro-description {
+    font-size: 1rem;
+    margin-top: 2rem;
+}
+
+.intro-button {
+    margin-top: 2rem;
+    padding: 1rem 2rem;
+    font-size: 1rem;
+    border: none;
+    background-color: #6c63ff;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.intro-text,
+.intro-button {
+    position: relative;
+    z-index: 2;
+}
+
+.intro-button:hover {
+    background-color: #5856d6;
+}

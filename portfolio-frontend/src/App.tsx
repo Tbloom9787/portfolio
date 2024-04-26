@@ -1,6 +1,7 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Navbar from './components/common/Navbar';
+import Home from './sections/Home';
 import About from './sections/About';
 import Experience from './sections/Experience';
 import Work from './sections/Work';
@@ -12,6 +13,7 @@ const App: React.FC = () => {
     <div className='App'>
       <Navbar />
       <main>
+        <Home />
         <About />
         <Experience />
         <Work />
