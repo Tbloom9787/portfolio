@@ -1,10 +1,12 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import SimpleParticles from '../utils/SimpleParticles';
 import '../assets/styles/Home.css';
 
 const Home: React.FC = () => {
   return (
     <motion.section id='home' className='home-section'>
+      <SimpleParticles />
       <div className='intro-container'>
         <div className='intro-text'>
           <p className='intro-greeting'>Hi, my name is</p>
