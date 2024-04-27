@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import SimpleParticles from '../utils/SimpleParticles';
-import '../assets/styles/Home.css';
+import SimpleParticles from '../../components/SimpleParticles';
+import './Home.css';
 
 const Home: React.FC = () => {
   return (
