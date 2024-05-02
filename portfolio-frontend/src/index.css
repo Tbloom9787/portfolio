@@ -5,6 +5,11 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+      width: 100%;
+      overflow-x: hidden;
+      /* This will prevent horizontal scrolling */
+      max-width: 100%;
+      /* Ensures that the body does not exceed the viewport */
 }
 
 code {

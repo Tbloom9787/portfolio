@@ -1,7 +1,7 @@
 import React from 'react';
 import { Navbar, Container, Nav, Button } from 'react-bootstrap';
 import { Link } from 'react-scroll';
-import Logo from '../Logo/Logo';
+import Logo from './Logo/Logo';
 import './Navbar.css';
 
 const NavigationBar: React.FC = () => {
