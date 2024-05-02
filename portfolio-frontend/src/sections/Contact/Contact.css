@@ -1,8 +1,46 @@
 .contact-section {
-    padding: 50px 0;
-    background-color: #f8f9fa;
+    background-color: #2C3E50;
+    color: #ffffff;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 100vh;
 }
 
-.form-control {
-    margin-bottom: 15px;
+.contact-form {
+    background: #32363e;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+    width: 100%;
+}
+
+.input-icon {
+    color: #74b9ff;
+    margin-right: 10px;
+}
+
+.contact-button {
+    width: 100%;
+    background-color: #1ABC9C;
+    border: none;
+    transition: background-color 0.3s ease;
+}
+
+.contact-button:hover {
+    background-color: #16A085;
+}
+
+.email-direct {
+    margin-top: 10px;
+}
+
+.email-link {
+    color: #74b9ff;
+    text-decoration: none;
+}
+
+.email-link:hover {
+    text-decoration: underline;
 }
