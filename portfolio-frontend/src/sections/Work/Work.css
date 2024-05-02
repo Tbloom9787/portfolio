@@ -1,9 +1,44 @@
 .work-section {
-    padding: 50px 0;
-    background-color: #343a40;
-    color: white;
+    background-color: #1e2125;
+    color: #E1E1E6;
+    padding: 50px 20px;
+    box-sizing: border-box;
 }
 
-.card {
-    margin-bottom: 20px;
+.work-section .card {
+    background-color: #282c34;
+    border: none;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s;
+}
+
+.work-section .card:hover {
+    transform: translateY(-5px);
+}
+
+.work-section .card-img-top {
+    height: 180px;
+    object-fit: cover;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+}
+
+.work-section .card-title {
+    color: #74b9ff;
+    margin-bottom: 12px;
+}
+
+.work-section .card-text {
+    font-size: 0.9rem;
+    color: #ccc;
+}
+
+.work-section .btn-primary {
+    background-color: #1ABC9C;
+    border: none;
+}
+
+.work-section .btn-primary:hover {
+    background-color: #16A085;
 }
