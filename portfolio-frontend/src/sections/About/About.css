@@ -1,4 +1,53 @@
 .about-section {
-    padding: 50px 0;
-    background-color: #f8f9fa;
+    background-color: #1e2125;
+    color: #333;
+    padding: 50px;
+    box-sizing: border-box;
+}
+
+.about-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.profile-pic {
+    width: 160px;
+    height: 160px;
+    border: 4px solid #274472;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+}
+
+.about-section p {
+    font-size: 1.2rem;
+}
+
+.skill-set {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-top: 2rem;
+}
+
+.skill-set .skill {
+    flex-basis: calc(50% - 10px);
+    margin-bottom: 1rem;
+}
+
+@media (max-width: 768px) {
+    .skill-set .skill {
+        flex-basis: 100%;
+    }
+}
+
+.tooltip-inner {
+    background-color: #000;
+    color: #fff;
+}
+
+.other-skills {
+    margin-top: 1rem;
+}
+
+.other-skills h4 {
+    margin-bottom: 0.5rem;
 }
