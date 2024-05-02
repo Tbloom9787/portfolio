@@ -1,14 +1,179 @@
 .experience-section {
+    background-color: #2C3E50;
+    color: #fff;
     padding: 50px 0;
-    background-color: #fff;
+    box-sizing: border-box;
 }
 
-.timeline {
+.experience-section h1 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.experience-section h4,
+.experience-section p {
+    margin: 0;
+    padding: 4px 0;
+}
+
+.timeline-container {
     position: relative;
-    padding: 20px;
-    margin-top: 30px;
+    width: 75%;
+}
+
+.timeline-line {
+    position: absolute;
+    left: 50%;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background-color: #777;
+    z-index: 1;
+}
+
+.timeline-entry {
+    position: relative;
+    width: 50%;
+    margin: 20px 0;
+}
+
+.timeline-entry.left {
+    left: 0;
+    text-align: right;
+    padding-right: 75px;
+}
+
+.timeline-entry.right {
+    left: 50%;
+    text-align: left;
+    padding-left: 75px;
+}
+
+.timeline-entry .timeline-circle {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #fff;
+    border: 2px solid #007bff;
+    position: absolute;
+    top: 50%;
+    z-index: 3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.timeline-entry.left .timeline-circle {
+    right: 0%;
+    transform: translateX(50%) translateY(-50%);
+}
+
+.timeline-entry.right .timeline-circle {
+    left: 0%;
+    transform: translateX(-50%) translateY(-50%);
+}
+
+.timeline-entry .card {
+    background-color: #F8F9FA;
+    color: #333333;
+    margin-bottom: 20px;
+    border: none;
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.timeline-entry .card-header {
+    background-color: #E9EEF1;
+    color: #74b9ff;
+    border-bottom: none;
+    padding: 10px 15px;
+    font-size: 1.5rem;
+}
+
+.timeline-entry .card-body {
+    padding: 15px;
+}
+
+.timeline-entry .card-footer {
+    background-color: #E9EEF1;
+    color: #333333;
+    border-top: none;
+    padding: 10px 15px;
+}
+
+.timeline-entry .badge {
+    margin-left: 5px;
+}
+
+/*
+.timeline-entry .card:hover {
+    transform: scale(1.03);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+} 
+*/
+
+.timeline-entry .card:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+}
+
+.timeline-entry .expand-icon {
+    margin-left: 10px;
+    cursor: pointer;
 }
 
 .timeline-item {
-    margin-bottom: 40px;
+    position: relative;
+    padding: 10px 20px;
+    background-color: #222;
+    border-radius: 4px;
+    z-index: 4;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.timeline-entry .timeline-connector {
+    position: absolute;
+    height: 2px;
+    background-color: #007bff;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 2;
+}
+
+.timeline-entry.left .timeline-connector {
+    right: 0%;
+    width: calc(50% - 20px);
+}
+
+.timeline-entry.right .timeline-connector {
+    left: 0%;
+    width: calc(50% - 20px);
+}
+
+.timeline-icon {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 3;
+}
+
+.timeline-entry.left .timeline-icon {
+    right: 0%;
+    transform: translateX(50%) translateY(-50%);
+}
+
+.timeline-entry.right .timeline-icon {
+    left: 0%;
+    transform: translateX(-50%) translateY(-50%);
+}
+
+.company-logo {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+}
+
+.company-initials {
+    font-size: 1em;
+    color: #007bff;
+    font-weight: bold;
 }
