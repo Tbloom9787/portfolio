@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   Container,
   Row,
@@ -9,31 +9,43 @@ import {
   Badge,
 } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faJsSquare, faReact, faAws } from '@fortawesome/free-brands-svg-icons';
-import { faDatabase } from '@fortawesome/free-solid-svg-icons';
+import { faJsSquare } from '@fortawesome/free-brands-svg-icons';
+import iconMapping from './iconMapping';
 import './About.css';
 
-const About: React.FC = () => {
-  const skills = [
-    { icon: faJsSquare, name: 'JavaScript', experience: 4, proficiency: 90 },
-    {
-      icon: faReact,
-      name: 'React & MERN Stack',
-      experience: 3,
-      proficiency: 85,
-    },
-    { icon: faDatabase, name: '.NET & MSSQL', experience: 3, proficiency: 80 },
-    { icon: faAws, name: 'AWS & DevOps', experience: 2, proficiency: 75 },
-  ];
+interface Skill {
+  name: string;
+  experience: number;
+  icon: string;
+}
 
-  const otherSkills = [
-    'Python',
-    'GraphQL',
-    'Docker',
-    'Serverless Frameworks',
-    'TypeScript',
-    'MongoDB',
-  ];
+interface Profile {
+  introduction: string;
+  bio: string;
+  profileImage: string;
+  coreSkills: Skill[];
+  otherSkills: string[];
+}
+
+const About: React.FC = () => {
+  const [profile, setProfile] = useState<Profile | null>(null);
+
+  useEffect(() => {
+    const fetchProfile = async () => {
+      try {
+        const response = await fetch('http://localhost:8000/api/profile');
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        const data: Profile = await response.json();
+        setProfile(data);
+      } catch (error) {
+        console.error('Error fetching profile data:', error);
+      }
+    };
+
+    fetchProfile();
+  }, []);
 
   const renderTooltip = (experience: number) => (
     <Tooltip id={`tooltip-${experience}`}>
@@ -55,48 +67,35 @@ const About: React.FC = () => {
       <Row className='mt-5'>
         <Col md={2} className='text-end'>
           <img
-            src='/assets/images/me.jpg'
-            alt='Tyler Bloom smiling'
+            src={profile?.profileImage}
+            alt='Profile'
             className='img-fluid rounded-circle profile-pic'
           />
         </Col>
         <Col md={4} style={{ paddingRight: '50px' }}>
-          <h3>Get to know me!</h3>
-          <p>
-            Hi, I'm Tyler Bloom, a Full Stack Developer specializing in crafting
-            web applications that optimize startup operations. Since launching
-            my tech career in 2016, I have continuously honed a robust Full
-            Stack skillset, driven by a foundational understanding of data
-            structures and algorithms.
-          </p>
-          <p>
-            I thrive on challenges that require both rigorous problem-solving
-            and creative innovation. My approach ensures that each project not
-            only meets but exceeds expectations, enhancing operational
-            efficiencies and advancing team objectives.
-          </p>
-          <p>
-            When I'm not coding, I explore the outdoors or dissect the latest
-            tech trends, finding balance and inspiration. This ongoing journey
-            fuels my passion for continuous learning and pushing the boundaries
-            of what we can achieve in web development.
-          </p>
+          <h3>{profile?.introduction || 'Get to know me!'}</h3>
+          <p>{profile?.bio}</p>
         </Col>
         <Col md={6} style={{ paddingLeft: '50px' }}>
           <div className='about-skills'>
             <h3>Core Skills</h3>
             <div className='skill-set'>
-              {skills.map((skill) => (
+              {profile?.coreSkills.map((skill, index) => (
                 <OverlayTrigger
-                  key={skill.name}
+                  key={index}
                   placement='top'
-                  overlay={renderTooltip(skill.experience)}
+                  overlay={
+                    <Tooltip>{`${skill.name} with ${skill.experience} years of experience`}</Tooltip>
+                  }
                 >
                   <div className='skill'>
-                    <FontAwesomeIcon icon={skill.icon} size='3x' />
+                    <FontAwesomeIcon
+                      icon={iconMapping[skill.icon] || faJsSquare}
+                      size='3x'
+                    />
                     <ProgressBar
-                      now={skill.proficiency}
-                      label={`${skill.proficiency}%`}
+                      now={skill.experience * 25}
+                      label={`${skill.experience * 25}%`}
                     />
                   </div>
                 </OverlayTrigger>
@@ -105,8 +104,8 @@ const About: React.FC = () => {
           </div>
           <div className='other-skills'>
             <h4>Other Skills</h4>
-            {otherSkills.map((skill) => (
-              <Badge pill bg='secondary' className='m-1' key={skill}>
+            {profile?.otherSkills.map((skill, index) => (
+              <Badge pill bg='secondary' className='m-1' key={index}>
                 {skill}
               </Badge>
             ))}
