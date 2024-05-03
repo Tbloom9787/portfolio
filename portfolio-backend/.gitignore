@@ -1,0 +1,9 @@
+# Compiled files
+dist/
+
+# Editor directories and files
+.vscode/
+.idea/
+
+# Dependency directories
+npm-debug.log*
