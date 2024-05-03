@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
-import './Experience.css';
 import TimelineEntry from './TimelineEntry/TimelineEntry';
+import './Experience.css';
 
 interface Milestone {
   logo: string;
@@ -13,6 +13,7 @@ interface Milestone {
 }
 
 const Experience: React.FC = () => {
+  /*
   const milestones: Milestone[] = [
     {
       logo: '/assets/images/csuf-logo.png',
@@ -41,13 +42,32 @@ const Experience: React.FC = () => {
       description:
         "During my role at Overair, an eVTOL aerospace startup, I was responsible for the development of internal applications that bolster the capabilities of our teams in Procurement, Shipping & Receiving, and Engineering. My work is focused on designing tools that streamline operations and enhance project management efficiency. Managing the company's Jira system, I ensure that coordination and workflow integration across departments are smooth and effective, thereby supporting the organization's innovative drive.",
     },
-  ];
+  ]; */
+
+  const [milestones, setMilestones] = useState<Milestone[]>([]);
+
+  useEffect(() => {
+    const fetchMilestones = async () => {
+      try {
+        const response = await fetch(`http://localhost:8000/api/milestones`);
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        const data = await response.json();
+        setMilestones(data);
+      } catch (error) {
+        console.error('Error fetching milestones', error);
+      }
+    };
+
+    fetchMilestones();
+  }, []);
 
   return (
     <Container id='experience' fluid className='experience-section min-vh-100'>
       <Row className='mt-5'>
         <Col xs={12}>
-        <h1 className='text-center'>My Experience</h1>
+          <h1 className='text-center'>My Experience</h1>
         </Col>
       </Row>
       <Row className='justify-content-center mt-2'>
