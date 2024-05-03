@@ -1,19 +1,8 @@
 import express from 'express';
-import Milestone from '../models/Milestone';
+import { getAllMilestones } from '../controllers/milestonesController';
 
 const router = express.Router();
 
-router.get('/milestones', async (req, res) => {
-    try {
-        const milestones = await Milestone.find({});
-        res.json(milestones);
-    } catch (error: unknown) {
-        if (error instanceof Error) {
-            res.status(500).json({ message: error.message });
-        } else {
-            res.status(500).json({ message: 'Unknown error occurred' });
-        }
-    }
-});
+router.get('/milestones', getAllMilestones);
 
 export default router;
