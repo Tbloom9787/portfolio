@@ -1,11 +1,14 @@
 import dotenv from 'dotenv';
-dotenv.config();
 import express from 'express';
 import mongoose from 'mongoose';
 import cors from 'cors';
+import homeRouter from './routes/home';
 import profileRouter from './routes/profile';
 import milestonesRouter from './routes/milestones';
 import projectsRouter from './routes/projects';
+import emailRouter from './routes/email';
+
+dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 8080;
@@ -14,9 +17,11 @@ const mongoURI = process.env.MONGO_URI!;
 app.use(express.json());
 app.use(cors());
 
+app.use('/api', homeRouter);
 app.use('/api', profileRouter);
 app.use('/api', milestonesRouter);
 app.use('/api', projectsRouter);
+app.use('/api', emailRouter);
 
 mongoose
   .connect(mongoURI)

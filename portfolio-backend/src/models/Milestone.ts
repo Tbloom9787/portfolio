@@ -7,6 +7,7 @@ const MilestoneSchema = new mongoose.Schema({
   title: { type: String, required: true },
   period: { type: String, required: true },
   description: { type: String, required: true },
+  technologies: { type: [String], required: true },
 });
 
 const Milestone = mongoose.model('Milestone', MilestoneSchema);
