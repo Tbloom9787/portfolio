@@ -10,6 +10,7 @@ interface Milestone {
   title: string;
   period: string;
   description: string;
+  technologies: string[];
 }
 
 const Experience: React.FC = () => {
@@ -25,7 +26,7 @@ const Experience: React.FC = () => {
         const data = await response.json();
         setMilestones(data);
       } catch (error) {
-        console.error('Error fetching milestones', error);
+        console.error('Error fetching milestones:', error);
       }
     };
 

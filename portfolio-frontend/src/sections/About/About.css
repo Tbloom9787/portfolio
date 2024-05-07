@@ -51,3 +51,20 @@
 .other-skills h4 {
     margin-bottom: 0.5rem;
 }
+
+.segmented-progress-bar .progress-bar {
+    width: 20%;
+    border-right: 2px solid #fff;
+}
+
+.segmented-progress-bar .progress-bar:last-child {
+    border-right: none;
+}
+
+.segmented-progress-bar .progress-bar.custom-filled {
+    background-color: #74b9ff;
+}
+
+.segmented-progress-bar .progress-bar.custom-empty {
+    background-color: #e0e0e0;
+}

@@ -1,10 +1,7 @@
 import React, { useState } from 'react';
 import { useInView } from 'react-intersection-observer';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {
-  faChevronDown,
-  faChevronUp,
-} from '@fortawesome/free-solid-svg-icons';
+import { faChevronDown, faChevronUp } from '@fortawesome/free-solid-svg-icons';
 import { Badge, Card } from 'react-bootstrap';
 import { motion } from 'framer-motion';
 
@@ -15,6 +12,7 @@ interface Milestone {
   title: string;
   period: string;
   description: string;
+  technologies: string[];
 }
 
 interface TimelineEntryProps {
@@ -55,6 +53,7 @@ const TimelineEntry: React.FC<TimelineEntryProps> = ({ milestone, index }) => {
   };
 
   const side = index % 2 === 0 ? 'left' : 'right';
+  const badgeColors = ['primary', 'secondary', 'success'];
 
   return (
     <motion.div
@@ -96,9 +95,16 @@ const TimelineEntry: React.FC<TimelineEntryProps> = ({ milestone, index }) => {
         </Card.Body>
         <Card.Footer className='text-muted'>
           Technologies used:
-          <Badge pill bg='primary' className='pl2'>JavaScript</Badge>
-          <Badge pill bg='secondary'>React</Badge>
-          <Badge pill bg='success'>Node.js</Badge>
+          {milestone.technologies.map((tech, index) => (
+            <Badge
+              key={tech}
+              pill
+              bg={badgeColors[index % badgeColors.length]}
+              className='m-1'
+            >
+              {tech}
+            </Badge>
+          ))}
         </Card.Footer>
       </MotionCard>
     </motion.div>

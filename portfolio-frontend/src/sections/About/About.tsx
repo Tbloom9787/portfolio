@@ -3,7 +3,7 @@ import {
   Container,
   Row,
   Col,
-  ProgressBar,
+  ProgressBar as RBProgressBar,
   Tooltip,
   OverlayTrigger,
   Badge,
@@ -27,6 +27,23 @@ interface Profile {
   otherSkills: string[];
 }
 
+interface ProgressBarProps {
+  experience: number;
+}
+
+const ProgressBar: React.FC<ProgressBarProps> = ({ experience }) => (
+  <RBProgressBar className='segmented-progress-bar'>
+    {[...Array(5)].map((_, i) => (
+      <RBProgressBar
+        key={i}
+        now={1}
+        max={1}
+        className={i < experience ? 'custom-filled' : 'custom-empty'}
+      />
+    ))}
+  </RBProgressBar>
+);
+
 const About: React.FC = () => {
   const [profile, setProfile] = useState<Profile | null>(null);
 
@@ -49,7 +66,7 @@ const About: React.FC = () => {
 
   const renderTooltip = (experience: number) => (
     <Tooltip id={`tooltip-${experience}`}>
-      Years of Experience: {experience}
+      {`${experience} years of experience`}
     </Tooltip>
   );
 
@@ -84,19 +101,18 @@ const About: React.FC = () => {
                 <OverlayTrigger
                   key={index}
                   placement='top'
-                  overlay={
-                    <Tooltip>{`${skill.name} with ${skill.experience} years of experience`}</Tooltip>
-                  }
+                  overlay={renderTooltip(skill.experience)}
                 >
-                  <div className='skill'>
-                    <FontAwesomeIcon
-                      icon={iconMapping[skill.icon] || faJsSquare}
-                      size='3x'
-                    />
-                    <ProgressBar
-                      now={skill.experience * 25}
-                      label={`${skill.experience * 25}%`}
-                    />
+                  <div className='skill mb-3'>
+                    <div className='d-flex align-items-center mb-1'>
+                      <FontAwesomeIcon
+                        icon={iconMapping[skill.icon] || faJsSquare}
+                        size='3x'
+                        className='me-2'
+                      />
+                      <strong>{skill.name}</strong>
+                    </div>
+                    <ProgressBar experience={skill.experience} />
                   </div>
                 </OverlayTrigger>
               ))}
