@@ -44,3 +44,10 @@
 .email-link:hover {
     text-decoration: underline;
 }
+
+.toast-container {
+    z-index: 1050;
+    position: fixed;
+    top: 1rem;
+    right: 1rem;
+}

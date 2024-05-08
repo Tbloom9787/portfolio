@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Container, Row, Col, Card, Button } from 'react-bootstrap';
+import imageMapping from './imageMapping';
 import './Work.css';
 
 interface Project {
@@ -48,7 +49,7 @@ const Work: React.FC = () => {
             <Card>
               <Card.Img
                 variant='top'
-                src={project.image}
+                src={imageMapping[project.image]}
                 alt={`${project.name} UI`}
                 loading='lazy'
               />

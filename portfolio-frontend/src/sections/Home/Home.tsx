@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import SimpleParticles from './SimpleParticles/SimpleParticles';
 import { Container, Row, Col } from 'react-bootstrap';
+import { Link } from 'react-scroll';
 import './Home.css';
 
 interface HomeContent {
@@ -66,14 +67,22 @@ const Home: React.FC = () => {
             >
               {home?.description}
             </motion.p>
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className='intro-button'
-              transition={{ duration: 0.3 }}
+            <Link
+              to='work'
+              spy={true}
+              smooth={true}
+              offset={-70}
+              duration={500}
             >
-              {home?.buttonText}
-            </motion.button>
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                transition={{ duration: 0.3 }}
+                className='intro-button'
+              >
+                {home?.buttonText}
+              </motion.button>
+            </Link>
           </Col>
         </Row>
       </Container>

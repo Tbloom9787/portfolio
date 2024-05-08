@@ -24,7 +24,7 @@ const Experience: React.FC = () => {
           throw new Error(`HTTP error! Status: ${response.status}`);
         }
         const data = await response.json();
-        setMilestones(data);
+        setMilestones(data.reverse());
       } catch (error) {
         console.error('Error fetching milestones:', error);
       }
@@ -35,7 +35,7 @@ const Experience: React.FC = () => {
 
   return (
     <Container id='experience' fluid className='experience-section min-vh-100'>
-      <Row className='mt-5'>
+      <Row className='mt-2'>
         <Col xs={12}>
           <h1 className='text-center'>My Experience</h1>
         </Col>

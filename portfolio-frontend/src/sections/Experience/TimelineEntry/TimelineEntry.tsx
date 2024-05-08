@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronDown, faChevronUp } from '@fortawesome/free-solid-svg-icons';
 import { Badge, Card } from 'react-bootstrap';
 import { motion } from 'framer-motion';
+import logoMapping from './logoMapping';
 
 interface Milestone {
   logo: string;
@@ -67,7 +68,7 @@ const TimelineEntry: React.FC<TimelineEntryProps> = ({ milestone, index }) => {
       <div className={`timeline-circle ${side}`}>
         {milestone.logo ? (
           <img
-            src={milestone.logo}
+            src={logoMapping[milestone.logo]}
             alt={`${milestone.company} Logo`}
             className='company-logo'
           />
@@ -78,7 +79,12 @@ const TimelineEntry: React.FC<TimelineEntryProps> = ({ milestone, index }) => {
       <div className={`timeline-connector ${side}`}></div>
       <MotionCard style={{ zIndex: 4 }} layout>
         <Card.Header>
-          {milestone.title} @ {milestone.company}
+          <span>
+            {milestone.title} @ {milestone.company}
+          </span>
+          <div className='text-muted' style={{ fontSize: '0.8rem' }}>
+            {milestone.period}
+          </div>
         </Card.Header>
         <Card.Body>
           <p>

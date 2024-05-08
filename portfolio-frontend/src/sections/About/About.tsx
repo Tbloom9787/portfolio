@@ -10,6 +10,7 @@ import {
 } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faJsSquare } from '@fortawesome/free-brands-svg-icons';
+import profilePic from '../../assets/images/me.jpg';
 import iconMapping from './iconMapping';
 import './About.css';
 
@@ -22,7 +23,6 @@ interface Skill {
 interface Profile {
   introduction: string;
   bio: string;
-  profileImage: string;
   coreSkills: Skill[];
   otherSkills: string[];
 }
@@ -84,7 +84,7 @@ const About: React.FC = () => {
       <Row className='mt-5'>
         <Col md={2} className='text-end'>
           <img
-            src={profile?.profileImage}
+            src={profilePic}
             alt='Profile'
             className='img-fluid rounded-circle profile-pic'
           />

@@ -1,12 +1,22 @@
 import React, { useState, FormEvent } from 'react';
-import { Container, Row, Col, Form, Button } from 'react-bootstrap';
+import {
+  Container,
+  Row,
+  Col,
+  Form,
+  Button,
+  Toast,
+  ToastContainer,
+} from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUser, faEnvelope, faPen } from '@fortawesome/free-solid-svg-icons';
+import { faUser, faEnvelope, faPen, faCheckCircle } from '@fortawesome/free-solid-svg-icons';
 import Footer from '../../components/common/Footer/Footer';
 import './Contact.css';
 
 const Contact: React.FC = () => {
   const [validated, setValidated] = useState(false);
+  const [showToast, setShowToast] = useState(false);
+  const [toastMessage, setToastMessage] = useState('');
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -31,11 +41,15 @@ const Contact: React.FC = () => {
       })
         .then((response) => response.json())
         .then((data) => {
-          alert('Message sent!');
+          setToastMessage('Message sent!');
+          setShowToast(true);
           form.reset();
+          setValidated(false);
         })
         .catch((error) => {
           console.error('Error:', error);
+          setToastMessage('Failed to send message. Please try again.');
+          setShowToast(true);
         });
     }
 
@@ -118,6 +132,27 @@ const Contact: React.FC = () => {
         </Form>
       </div>
       <Footer />
+      <ToastContainer position='top-end' className='p-3'>
+        <Toast
+          onClose={() => setShowToast(false)}
+          show={showToast}
+          delay={3000}
+          autohide
+          bg='success'
+        >
+          <Toast.Header>
+            <FontAwesomeIcon
+              icon={faCheckCircle}
+              className='me-2'
+              style={{ color: 'white' }}
+            />
+            <strong className='me-auto' style={{ color: 'white' }}>
+              Success
+            </strong>
+          </Toast.Header>
+          <Toast.Body style={{ color: 'white' }}>{toastMessage}</Toast.Body>
+        </Toast>
+      </ToastContainer>
     </Container>
   );
 };
