@@ -1,5 +1,6 @@
 import dotenv from 'dotenv';
 import express from 'express';
+import rateLimit from 'express-rate-limit';
 import mongoose from 'mongoose';
 import cors from 'cors';
 import homeRouter from './routes/home';
@@ -22,6 +23,14 @@ app.use('/api', profileRouter);
 app.use('/api', milestonesRouter);
 app.use('/api', projectsRouter);
 app.use('/api', emailRouter);
+
+const limiter = rateLimit({
+  windowMs: 24 * 60 * 60 * 1000,
+  max: 3,
+  message: 'Too many requests from this IP, please try again after 24 hours',
+});
+
+app.use('/api/send-email', limiter);
 
 mongoose
   .connect(mongoURI)
