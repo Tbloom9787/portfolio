@@ -17,9 +17,10 @@ const Home: React.FC = () => {
   const [home, setHomeContent] = useState<HomeContent | null>(null);
 
   useEffect(() => {
+    const apiUrl = process.env.REACT_APP_API_URL;
     const fetchHomeContent = async () => {
       try {
-        const response = await fetch(`http://localhost:8000/api/home`);
+        const response = await fetch(`${apiUrl}/api/home`);
         if (!response.ok) {
           throw new Error(`HTTP error! Status: ${response.status}`);
         }

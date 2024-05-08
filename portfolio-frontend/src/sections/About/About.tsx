@@ -48,9 +48,10 @@ const About: React.FC = () => {
   const [profile, setProfile] = useState<Profile | null>(null);
 
   useEffect(() => {
+    const apiUrl = process.env.REACT_APP_API_URL;
     const fetchProfile = async () => {
       try {
-        const response = await fetch('http://localhost:8000/api/profile');
+        const response = await fetch(`${apiUrl}/api/profile`);
         if (!response.ok) {
           throw new Error(`HTTP error! Status: ${response.status}`);
         }

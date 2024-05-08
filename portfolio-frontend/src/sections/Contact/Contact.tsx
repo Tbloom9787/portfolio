@@ -9,7 +9,12 @@ import {
   ToastContainer,
 } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUser, faEnvelope, faPen, faCheckCircle } from '@fortawesome/free-solid-svg-icons';
+import {
+  faUser,
+  faEnvelope,
+  faPen,
+  faCheckCircle,
+} from '@fortawesome/free-solid-svg-icons';
 import Footer from '../../components/common/Footer/Footer';
 import './Contact.css';
 
@@ -32,7 +37,8 @@ const Contact: React.FC = () => {
         message: formData.get('message'),
       };
 
-      fetch('http://localhost:8000/api/send-email', {
+      const apiUrl = process.env.REACT_APP_API_URL;
+      fetch(`${apiUrl}/api/send-email`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

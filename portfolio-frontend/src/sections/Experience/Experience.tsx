@@ -17,9 +17,10 @@ const Experience: React.FC = () => {
   const [milestones, setMilestones] = useState<Milestone[]>([]);
 
   useEffect(() => {
+    const apiUrl = process.env.REACT_APP_API_URL;
     const fetchMilestones = async () => {
       try {
-        const response = await fetch(`http://localhost:8000/api/milestones`);
+        const response = await fetch(`${apiUrl}/api/milestones`);
         if (!response.ok) {
           throw new Error(`HTTP error! Status: ${response.status}`);
         }

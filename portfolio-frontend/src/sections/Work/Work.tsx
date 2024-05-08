@@ -16,9 +16,10 @@ const Work: React.FC = () => {
   const [projects, setProjects] = useState<Project[]>([]);
 
   useEffect(() => {
+    const apiUrl = process.env.REACT_APP_API_URL;
     const fetchProjects = async () => {
       try {
-        const response = await fetch('http://localhost:8000/api/projects');
+        const response = await fetch(`${apiUrl}/api/projects`);
         if (!response.ok) {
           throw new Error(`HTTP error! Status: ${response.status}`);
         }
