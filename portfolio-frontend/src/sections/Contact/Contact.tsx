@@ -62,16 +62,7 @@ const Contact: React.FC = () => {
       fluid
       className='contact-section min-vh-100 d-flex align-items-center justify-content-center'
     >
-      <div
-        style={{
-          width: '100%',
-          maxWidth: '600px',
-          flexGrow: 1,
-          display: 'flex',
-          flexDirection: 'column',
-          justifyContent: 'center',
-        }}
-      >
+      <div className='content-area'>
         <Row>
           <Col xs={12}>
             <h1 className='text-center'>Contact</h1>

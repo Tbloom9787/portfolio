@@ -65,7 +65,7 @@ const NavigationBar: React.FC = () => {
               to='contact'
               spy={true}
               smooth={true}
-              offset={-70}
+              offset={0}
               duration={500}
               className='nav-link'
             >

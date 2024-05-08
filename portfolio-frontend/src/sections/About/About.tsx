@@ -66,7 +66,9 @@ const About: React.FC = () => {
 
   const renderTooltip = (experience: number) => (
     <Tooltip id={`tooltip-${experience}`}>
-      {`${experience} years of experience`}
+      {experience === 1
+        ? `${experience} year of experience`
+        : `${experience} years of experience`}
     </Tooltip>
   );
 
