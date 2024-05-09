@@ -8,5 +8,5 @@ const ProfileSchema = new mongoose.Schema({
   otherSkills: [String],
 });
 
-const Profile = mongoose.model('Profile', ProfileSchema);
+const Profile = mongoose.model('Profile', ProfileSchema, 'profile');
 export default Profile;

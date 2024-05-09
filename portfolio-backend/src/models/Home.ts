@@ -8,5 +8,5 @@ const HomeSchema = new mongoose.Schema({
   buttonText: String,
 });
 
-const Home = mongoose.model('Home', HomeSchema);
+const Home = mongoose.model('Home', HomeSchema, 'home');
 export default Home;

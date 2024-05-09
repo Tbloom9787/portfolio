@@ -2,24 +2,27 @@
   "name": "portfolio-backend",
   "version": "1.0.0",
   "main": "index.js",
-  "author": "Tbloom",
+  "author": "Tyler Bloom <tylerbloom9787@gmail.com> (https://linkedin.com/in/bloom-dev)",
   "license": "MIT",
   "dependencies": {
-    "@types/cors": "^2.8.17",
-    "@types/express": "^4.17.21",
-    "@types/node": "^20.12.8",
-    "@types/nodemailer": "^6.4.15",
     "cors": "^2.8.5",
     "dotenv": "^16.4.5",
     "express": "^4.19.2",
     "express-rate-limit": "^7.2.0",
     "google-auth-library": "^9.9.0",
     "mongoose": "^8.3.3",
-    "nodemailer": "^6.9.13",
-    "typescript": "^5.4.5"
+    "nodemailer": "^6.9.13"
+  },
+  "devDependencies": {
+    "typescript": "^5.4.5",
+    "@types/cors": "^2.8.17",
+    "@types/express": "^4.17.21",
+    "@types/node": "^20.12.8",
+    "@types/nodemailer": "^6.4.15"
   },
   "scripts": {
     "build": "tsc",
-    "start": "yarn build && node ./dist/index.js"
+    "start": "node ./dist/index.js",
+    "postinstall": "yarn build"
   }
 }
