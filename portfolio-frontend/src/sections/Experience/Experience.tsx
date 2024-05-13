@@ -20,11 +20,12 @@ const Experience: React.FC = () => {
     const apiUrl = process.env.REACT_APP_API_URL;
     const fetchMilestones = async () => {
       try {
-        const response = await fetch(`${apiUrl}/api/milestones`);
+        const response = await fetch(`${apiUrl}/milestones`);
         if (!response.ok) {
           throw new Error(`HTTP error! Status: ${response.status}`);
         }
-        const data = await response.json();
+        const result = await response.json();
+        const data = JSON.parse(result.body);
         setMilestones(data.reverse());
       } catch (error) {
         console.error('Error fetching milestones:', error);

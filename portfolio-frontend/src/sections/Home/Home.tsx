@@ -20,11 +20,16 @@ const Home: React.FC = () => {
     const apiUrl = process.env.REACT_APP_API_URL;
     const fetchHomeContent = async () => {
       try {
-        const response = await fetch(`${apiUrl}/api/home`);
+        const response = await fetch(`${apiUrl}/home`, {
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        });
         if (!response.ok) {
           throw new Error(`HTTP error! Status: ${response.status}`);
         }
-        const data: HomeContent = await response.json();
+        const result = await response.json();
+        const data = JSON.parse(result.body);
         setHomeContent(data);
       } catch (error) {
         console.error('Error fetching home data:', error);

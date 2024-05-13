@@ -23,6 +23,7 @@ interface Skill {
 interface Profile {
   introduction: string;
   bio: string;
+  extraBio: string;
   coreSkills: Skill[];
   otherSkills: string[];
 }
@@ -51,11 +52,16 @@ const About: React.FC = () => {
     const apiUrl = process.env.REACT_APP_API_URL;
     const fetchProfile = async () => {
       try {
-        const response = await fetch(`${apiUrl}/api/profile`);
+        const response = await fetch(`${apiUrl}/profile`, {
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        });
         if (!response.ok) {
           throw new Error(`HTTP error! Status: ${response.status}`);
         }
-        const data: Profile = await response.json();
+        const result = await response.json();
+        const data = JSON.parse(result.body);
         setProfile(data);
       } catch (error) {
         console.error('Error fetching profile data:', error);
@@ -95,6 +101,10 @@ const About: React.FC = () => {
         <Col md={4} style={{ paddingRight: '50px' }}>
           <h3>{profile?.introduction || 'Get to know me!'}</h3>
           <p>{profile?.bio}</p>
+          <br/>
+          <p>
+            {profile?.extraBio}
+          </p>
         </Col>
         <Col md={6} style={{ paddingLeft: '50px' }}>
           <div className='about-skills'>

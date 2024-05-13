@@ -29,35 +29,42 @@ const Contact: React.FC = () => {
 
     if (!form.checkValidity()) {
       event.stopPropagation();
-    } else {
-      const formData = new FormData(form);
-      const data = {
-        name: formData.get('name'),
-        email: formData.get('email'),
-        message: formData.get('message'),
-      };
-
-      const apiUrl = process.env.REACT_APP_API_URL;
-      fetch(`${apiUrl}/api/send-email`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(data),
-      })
-        .then((response) => response.json())
-        .then((data) => {
-          setToastMessage('Message sent!');
-          setShowToast(true);
-          form.reset();
-          setValidated(false);
-        })
-        .catch((error) => {
-          console.error('Error:', error);
-          setToastMessage('Failed to send message. Please try again.');
-          setShowToast(true);
-        });
+      setValidated(false);
+      return;
     }
+
+    const formData = new FormData(form);
+    const data = {
+      toAddresses: ['tylerbloom9787@gmail.com'],
+      subject: `Message from ${formData.get('name')}`,
+      bodyText: `You have received a message from ${formData.get(
+        'name'
+      )} (${formData.get('email')}):\n\n${formData.get('message')}`,
+      sourceEmail: 'contact@tylerbloom.io',
+    };
+
+    const apiUrl = process.env.REACT_APP_API_URL;
+    fetch(`${apiUrl}/email`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    })
+      .then((response) => response.json())
+      .then((responseData) => {
+        setToastMessage(responseData.message || 'Message sent!');
+        setShowToast(true);
+        form.reset();
+        setValidated(false);
+      })
+      .catch((error) => {
+        console.error('Error:', error);
+        setToastMessage('Failed to send message. Please try again.');
+        setShowToast(true);
+        form.reset();
+        setValidated(false);
+      });
 
     setValidated(true);
   };
@@ -82,14 +89,19 @@ const Contact: React.FC = () => {
         >
           <Form.Group className='mb-3'>
             <FontAwesomeIcon icon={faUser} className='input-icon' />
-            <Form.Control type='text' placeholder='Name' required />
+            <Form.Control type='text' name='name' placeholder='Name' required />
             <Form.Control.Feedback type='invalid'>
               Please enter your name.
             </Form.Control.Feedback>
           </Form.Group>
           <Form.Group className='mb-3'>
             <FontAwesomeIcon icon={faEnvelope} className='input-icon' />
-            <Form.Control required type='email' placeholder='Email' />
+            <Form.Control
+              required
+              type='email'
+              name='email'
+              placeholder='Email'
+            />
             <Form.Control.Feedback type='invalid'>
               Please enter a valid email address.
             </Form.Control.Feedback>
@@ -99,6 +111,7 @@ const Contact: React.FC = () => {
             <Form.Control
               as='textarea'
               rows={3}
+              name='message'
               placeholder='Message'
               required
             />

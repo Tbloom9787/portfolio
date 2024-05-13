@@ -4,7 +4,7 @@ import imageMapping from './imageMapping';
 import './Work.css';
 
 interface Project {
-  _id: string;
+  _id?: string;
   name: string;
   description: string;
   technologies: string[];
@@ -19,11 +19,12 @@ const Work: React.FC = () => {
     const apiUrl = process.env.REACT_APP_API_URL;
     const fetchProjects = async () => {
       try {
-        const response = await fetch(`${apiUrl}/api/projects`);
+        const response = await fetch(`${apiUrl}/projects`);
         if (!response.ok) {
           throw new Error(`HTTP error! Status: ${response.status}`);
         }
-        const data: Project[] = await response.json();
+        const result = await response.json();
+        const data = JSON.parse(result.body);
         setProjects(data);
       } catch (error) {
         console.error('Error fetching projects:', error);
@@ -45,8 +46,8 @@ const Work: React.FC = () => {
         </Col>
       </Row>
       <Row className='justify-content-center mt-4'>
-        {projects.map((project) => (
-          <Col key={project._id} md={6} lg={4} className='mb-4'>
+        {projects.map((project, index) => (
+          <Col key={index} md={6} lg={4} className='mb-4'>
             <Card>
               <Card.Img
                 variant='top'

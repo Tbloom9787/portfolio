@@ -7,3 +7,9 @@ dist/
 
 # Dependency directories
 npm-debug.log*
+
+# Local JSON files
+Home.json
+Milestones.json
+Profile.json
+Projects.json

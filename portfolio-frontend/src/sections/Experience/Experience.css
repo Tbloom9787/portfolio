@@ -17,6 +17,7 @@
 }
 
 .timeline-container {
+    overflow-x: hidden;
     position: relative;
     width: 75%;
 }
@@ -105,13 +106,6 @@
     margin-left: 5px;
 }
 
-/*
-.timeline-entry .card:hover {
-    transform: scale(1.03);
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
-} 
-*/
-
 .timeline-entry .card:hover {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
 }
@@ -177,3 +171,27 @@
     color: #007bff;
     font-weight: bold;
 }
+
+@media (max-width: 768px) {
+    .timeline-container {
+        width: 100%;
+    }
+
+    .timeline-entry {
+        width: 90%;
+        margin-left: 10px;
+    }
+
+    .timeline-entry.left,
+    .timeline-entry.right {
+        text-align: center;
+        padding: 0;
+        left: 0
+    }
+
+    .timeline-entry .timeline-circle,
+    .timeline-entry .timeline-connector {
+        display: none;
+    }
+}
+

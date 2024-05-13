@@ -22,7 +22,7 @@ const Footer: React.FC = () => {
           </Col>
           <Col xs={4} className='footer-content footer-center text-center'>
             <span>
-              <FontAwesomeIcon icon={faCode} /> Built using the MERN Stack
+              <FontAwesomeIcon icon={faCode} /> Built & Designed by Tyler Bloom
             </span>
           </Col>
           <Col xs={4} className='footer-content footer-right text-right'>
