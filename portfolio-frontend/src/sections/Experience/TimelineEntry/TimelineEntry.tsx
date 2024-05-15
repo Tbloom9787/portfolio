@@ -82,9 +82,7 @@ const TimelineEntry: React.FC<TimelineEntryProps> = ({ milestone, index }) => {
           <span>
             {milestone.title} @ {milestone.company}
           </span>
-          <div className='text-muted' style={{ fontSize: '0.8rem' }}>
-            {milestone.period}
-          </div>
+          <div className='period'>{milestone.period}</div>
         </Card.Header>
         <Card.Body>
           <p>
@@ -99,18 +97,20 @@ const TimelineEntry: React.FC<TimelineEntryProps> = ({ milestone, index }) => {
             />
           </p>
         </Card.Body>
-        <Card.Footer className='text-muted'>
-          Technologies used:
-          {milestone.technologies.map((tech, index) => (
-            <Badge
-              key={tech}
-              pill
-              bg={badgeColors[index % badgeColors.length]}
-              className='m-1'
-            >
-              {tech}
-            </Badge>
-          ))}
+        <Card.Footer>
+          <div style={{ color: '#9CA3AF' }}>
+            Technologies used:{' '}
+            {milestone.technologies.map((tech, index) => (
+              <Badge
+                key={tech}
+                pill
+                bg={badgeColors[index % badgeColors.length]}
+                className='m-1'
+              >
+                {tech}
+              </Badge>
+            ))}
+          </div>
         </Card.Footer>
       </MotionCard>
     </motion.div>
