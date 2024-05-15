@@ -48,47 +48,51 @@ const Home: React.FC = () => {
       >
         <Row>
           <Col md={10} lg={12} className='intro-text'>
-            <p className='intro-greeting'>{home?.greeting}</p>
-            <motion.h1
-              initial={{ y: -100, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              transition={{ duration: 1 }}
-              className='intro-name'
-            >
-              {home?.name}
-            </motion.h1>
-            <motion.h2
-              initial={{ y: 100, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              transition={{ duration: 1, delay: 0.2 }}
-              className='intro-title'
-            >
-              {home?.title}
-            </motion.h2>
-            <motion.p
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 1, delay: 0.4 }}
-              className='intro-description'
-            >
-              {home?.description}
-            </motion.p>
-            <Link
-              to='work'
-              spy={true}
-              smooth={true}
-              offset={-70}
-              duration={500}
-            >
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                transition={{ duration: 0.3 }}
-                className='intro-button'
-              >
-                {home?.buttonText}
-              </motion.button>
-            </Link>
+            {home && (
+              <>
+                <p className='intro-greeting'>{home.greeting}</p>
+                <motion.h1
+                  initial={{ y: -100, opacity: 0 }}
+                  animate={{ y: 0, opacity: 1 }}
+                  transition={{ duration: 1 }}
+                  className='intro-name'
+                >
+                  {home.name}
+                </motion.h1>
+                <motion.h2
+                  initial={{ y: 100, opacity: 0 }}
+                  animate={{ y: 0, opacity: 1 }}
+                  transition={{ duration: 1, delay: 0.2 }}
+                  className='intro-title'
+                >
+                  {home.title}
+                </motion.h2>
+                <motion.p
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ duration: 1, delay: 0.4 }}
+                  className='intro-description'
+                >
+                  {home.description}
+                </motion.p>
+                <Link
+                  to='work'
+                  spy={true}
+                  smooth={true}
+                  offset={-70}
+                  duration={500}
+                >
+                  <motion.button
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    transition={{ duration: 0.3 }}
+                    className='intro-button'
+                  >
+                    {home.buttonText}
+                  </motion.button>
+                </Link>
+              </>
+            )}
           </Col>
         </Row>
       </Container>

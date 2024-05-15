@@ -8,6 +8,8 @@ import {
   Toast,
   ToastContainer,
 } from 'react-bootstrap';
+import { motion } from 'framer-motion';
+import { useInView } from 'react-intersection-observer';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faUser,
@@ -22,6 +24,11 @@ const Contact: React.FC = () => {
   const [validated, setValidated] = useState(false);
   const [showToast, setShowToast] = useState(false);
   const [toastMessage, setToastMessage] = useState('');
+
+  const { ref, inView } = useInView({
+    triggerOnce: true,
+    threshold: 0.1,
+  });
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -74,11 +81,24 @@ const Contact: React.FC = () => {
       id='contact'
       fluid
       className='contact-section min-vh-100 d-flex align-items-center justify-content-center'
+      ref={ref}
     >
-      <div className='content-area'>
+      <motion.div
+        className='content-area'
+        initial={{ opacity: 0, y: 20 }}
+        animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+        transition={{ duration: 1 }}
+      >
         <Row>
           <Col xs={12}>
-            <h1 className='text-center'>Contact</h1>
+            <motion.h1
+              className='text-center'
+              initial={{ opacity: 0, y: -50 }}
+              animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: -50 }}
+              transition={{ duration: 1 }}
+            >
+              Contact
+            </motion.h1>
           </Col>
         </Row>
         <Form
@@ -140,7 +160,7 @@ const Contact: React.FC = () => {
             </Col>
           </Row>
         </Form>
-      </div>
+      </motion.div>
       <Footer />
       <ToastContainer position='top-end' className='p-3'>
         <Toast
