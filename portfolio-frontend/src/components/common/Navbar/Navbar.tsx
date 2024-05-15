@@ -71,15 +71,15 @@ const NavigationBar: React.FC = () => {
             >
               Contact
             </Link>
+            <Button
+              href='/assets/resume.pdf'
+              target='_blank'
+              rel='noopener noreferrer'
+              className='resume-button'
+            >
+              Resume
+            </Button>
           </Nav>
-          <Button
-            href='/assets/resume.pdf'
-            target='_blank'
-            rel='noopener noreferrer'
-            className='resume-button'
-          >
-            Resume
-          </Button>
         </Navbar.Collapse>
       </Container>
     </Navbar>
