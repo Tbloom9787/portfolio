@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { Container, Row, Col, Card, Button } from 'react-bootstrap';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
@@ -14,7 +14,7 @@ interface Project {
   link: string;
 }
 
-const Work: React.FC = () => {
+const Work = () => {
   const [projects, setProjects] = useState<Project[]>([]);
   const { ref, inView } = useInView({
     triggerOnce: true,

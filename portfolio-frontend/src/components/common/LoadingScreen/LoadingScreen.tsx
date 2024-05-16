@@ -1,8 +1,7 @@
-import React from 'react';
 import logo from '../../../assets/logos/my-logo.svg';
 import './LoadingScreen.css';
 
-const LoadingScreen: React.FC = () => {
+const LoadingScreen = () => {
   return (
     <div className='loading-screen'>
       <img src={logo} className='loading-logo' alt='Loading' />

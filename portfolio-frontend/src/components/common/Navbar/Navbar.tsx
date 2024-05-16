@@ -1,10 +1,13 @@
-import React from 'react';
 import { Navbar, Container, Nav, Button } from 'react-bootstrap';
 import { Link } from 'react-scroll';
+import useMediaQuery from '../../../utils/useMediaQuery';
 import Logo from './Logo/Logo';
 import './Navbar.css';
 
-const NavigationBar: React.FC = () => {
+const NavigationBar = () => {
+  const isMobile = useMediaQuery('(max-width: 960px)');
+  const offset = isMobile ? -50 : -70;
+
   return (
     <Navbar
       bg='dark'
@@ -43,7 +46,7 @@ const NavigationBar: React.FC = () => {
               to='experience'
               spy={true}
               smooth={true}
-              offset={-70}
+              offset={offset}
               duration={500}
               className='nav-link'
             >
@@ -72,7 +75,7 @@ const NavigationBar: React.FC = () => {
               Contact
             </Link>
             <Button
-              href='/assets/resume.pdf'
+              href='/assets/tyler-resume.pdf'
               target='_blank'
               rel='noopener noreferrer'
               className='resume-button'

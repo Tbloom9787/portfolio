@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import SimpleParticles from './SimpleParticles/SimpleParticles';
 import { Container, Row, Col } from 'react-bootstrap';
@@ -13,7 +13,7 @@ interface HomeContent {
   buttonText: string;
 }
 
-const Home: React.FC = () => {
+const Home = () => {
   const [home, setHomeContent] = useState<HomeContent | null>(null);
 
   useEffect(() => {

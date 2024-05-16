@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Navbar from './components/common/Navbar/Navbar';
 import SocialMediaLinks from './components/common/SocialLinks/SocialMediaLinks';
@@ -10,7 +10,7 @@ import Work from './sections/Work/Work';
 import Contact from './sections/Contact/Contact';
 import useMediaQuery from './utils/useMediaQuery';
 
-const App: React.FC = () => {
+const App = () => {
   const [loading, setLoading] = useState(true);
   const isMobile = useMediaQuery('(max-width: 768px)');
 

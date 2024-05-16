@@ -12,6 +12,10 @@
     margin-bottom: 2rem;
 }
 
+.content-row {
+    margin-top: 3rem;
+}
+
 .profile-col {
     padding-right: 50px;
 }
@@ -87,10 +91,15 @@
         margin-bottom: 1rem;
     }
 
+    .content-row {
+        margin-top: 1rem;
+    }
+
     .profile-col,
     .skills-col {
         padding-right: 10px;
         padding-left: 10px;
+        margin-top: 1rem;
     }
 
     .profile-pic {
@@ -100,6 +109,10 @@
 
     .about-section p {
         font-size: 1rem;
+    }
+
+    .skill-set {
+        margin-top: 1rem;
     }
 
     .skill-set .skill {

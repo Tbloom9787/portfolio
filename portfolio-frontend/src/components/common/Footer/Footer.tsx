@@ -6,7 +6,7 @@ import { faBolt, faCode } from '@fortawesome/free-solid-svg-icons';
 import { faGithub } from '@fortawesome/free-brands-svg-icons';
 import './Footer.css';
 
-const Footer: React.FC = () => {
+const Footer = () => {
   return (
     <footer className='footer'>
       <Container fluid>

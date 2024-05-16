@@ -1,5 +1,3 @@
-import React from 'react';
-import './SocialMediaLinks.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faEnvelope, // Import the envelope icon for email
@@ -10,8 +8,9 @@ import {
   faLinkedinIn,
   faGithub,
 } from '@fortawesome/free-brands-svg-icons';
+import './SocialMediaLinks.css';
 
-const SocialMediaLinks: React.FC = () => {
+const SocialMediaLinks = () => {
   return (
     <div className='links-container'>
       <a

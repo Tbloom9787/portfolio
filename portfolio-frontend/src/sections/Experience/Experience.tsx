@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import TimelineEntry from './TimelineEntry/TimelineEntry';
 import Tabs from './Tabs/Tabs';

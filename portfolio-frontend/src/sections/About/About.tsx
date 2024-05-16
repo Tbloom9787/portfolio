@@ -47,7 +47,7 @@ const ProgressBar: React.FC<ProgressBarProps> = ({ experience }) => (
   </RBProgressBar>
 );
 
-const About: React.FC = () => {
+const About = () => {
   const [profile, setProfile] = useState<Profile | null>(null);
   const { ref, inView } = useInView({
     triggerOnce: true,
@@ -104,7 +104,7 @@ const About: React.FC = () => {
           </motion.h1>
         </Col>
       </Row>
-      <Row className='mt-5'>
+      <Row className='content-row'>
         <Col md={2} className='text-end'>
           <motion.img
             src={profilePic}
