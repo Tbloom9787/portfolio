@@ -1,6 +1,6 @@
 .custom-navbar {
     background-color: #2C3E50 !important;
-    height: 80px;
+    height: 70px;
 }
 
 .custom-navbar .navbar-brand {
@@ -44,5 +44,22 @@
 
     .custom-navbar .navbar-collapse {
         justify-content: flex-end;
+    }
+
+    .custom-navbar .navbar-nav {
+        align-items: flex-end;
+        width: 100%;
+        justify-content: flex-end;
+        text-align: right;
+    }
+
+    .custom-navbar .nav-link {
+        margin-right: 0;
+    }
+
+    .resume-button {
+        margin-right: 0;
+        display: inline-block;
+        width: auto;
     }
 }

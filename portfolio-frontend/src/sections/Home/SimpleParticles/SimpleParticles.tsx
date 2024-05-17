@@ -1,8 +1,7 @@
-import React from 'react';
 import Particles from 'react-tsparticles';
 import { loadFull } from 'tsparticles';
 
-const SimpleParticles: React.FC = () => {
+const SimpleParticles = () => {
   const particlesInit = async (main: any) => {
     await loadFull(main);
   };

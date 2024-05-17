@@ -1,30 +1,24 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import TimelineEntry from './TimelineEntry/TimelineEntry';
+import Tabs from './Tabs/Tabs';
+import useMediaQuery from '../../utils/useMediaQuery';
 import './Experience.css';
 
-interface Milestone {
-  logo: string;
-  company: string;
-  companyInitials: string;
-  title: string;
-  period: string;
-  description: string;
-  technologies: string[];
-}
-
-const Experience: React.FC = () => {
-  const [milestones, setMilestones] = useState<Milestone[]>([]);
+const Experience = () => {
+  const [milestones, setMilestones] = useState([]);
+  const isMobile = useMediaQuery('(max-width: 960px)');
 
   useEffect(() => {
     const apiUrl = process.env.REACT_APP_API_URL;
     const fetchMilestones = async () => {
       try {
-        const response = await fetch(`${apiUrl}/api/milestones`);
+        const response = await fetch(`${apiUrl}/milestones`);
         if (!response.ok) {
           throw new Error(`HTTP error! Status: ${response.status}`);
         }
-        const data = await response.json();
+        const result = await response.json();
+        const data = JSON.parse(result.body);
         setMilestones(data.reverse());
       } catch (error) {
         console.error('Error fetching milestones:', error);
@@ -42,11 +36,24 @@ const Experience: React.FC = () => {
         </Col>
       </Row>
       <Row className='justify-content-center mt-2'>
-        <Col md={12} className='timeline-container'>
-          <div className='timeline-line'></div>
-          {milestones.map((milestone, index) => (
-            <TimelineEntry key={index} milestone={milestone} index={index} />
-          ))}
+        <Col
+          md={12}
+          className={isMobile ? 'tabs-container' : 'timeline-container'}
+        >
+          {isMobile ? (
+            <Tabs milestones={milestones} />
+          ) : (
+            <>
+              <div className='timeline-line'></div>
+              {milestones.map((milestone, index) => (
+                <TimelineEntry
+                  key={index}
+                  milestone={milestone}
+                  index={index}
+                />
+              ))}
+            </>
+          )}
         </Col>
       </Row>
     </Container>

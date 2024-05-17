@@ -1,4 +1,4 @@
-import React, { useState, FormEvent } from 'react';
+import { useState, FormEvent } from 'react';
 import {
   Container,
   Row,
@@ -8,6 +8,9 @@ import {
   Toast,
   ToastContainer,
 } from 'react-bootstrap';
+import { motion } from 'framer-motion';
+import { useInView } from 'react-intersection-observer';
+import DOMPurify from 'dompurify';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faUser,
@@ -18,10 +21,15 @@ import {
 import Footer from '../../components/common/Footer/Footer';
 import './Contact.css';
 
-const Contact: React.FC = () => {
+const Contact = () => {
   const [validated, setValidated] = useState(false);
   const [showToast, setShowToast] = useState(false);
   const [toastMessage, setToastMessage] = useState('');
+
+  const { ref, inView } = useInView({
+    triggerOnce: true,
+    threshold: 0.1,
+  });
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -29,37 +37,48 @@ const Contact: React.FC = () => {
 
     if (!form.checkValidity()) {
       event.stopPropagation();
-    } else {
-      const formData = new FormData(form);
-      const data = {
-        name: formData.get('name'),
-        email: formData.get('email'),
-        message: formData.get('message'),
-      };
+      setValidated(false);
+      return;
+    }
 
-      const apiUrl = process.env.REACT_APP_API_URL;
-      fetch(`${apiUrl}/api/send-email`, {
+    const formData = new FormData(form);
+
+    const name = DOMPurify.sanitize(formData.get('name') as string);
+    const email = DOMPurify.sanitize(formData.get('email') as string);
+    const message = DOMPurify.sanitize(formData.get('message') as string);
+
+    const data = {
+      toAddresses: ['tylerbloom9787@gmail.com'],
+      subject: `Message from ${name}`,
+      bodyText: `You have received a message from ${name} (${email}):\n\n${message}`,
+      sourceEmail: 'contact@tylerbloom.io',
+    };
+
+    const apiUrl = process.env.REACT_APP_API_URL;
+
+    try {
+      const response = await fetch(`${apiUrl}/email`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(data),
-      })
-        .then((response) => response.json())
-        .then((data) => {
-          setToastMessage('Message sent!');
-          setShowToast(true);
-          form.reset();
-          setValidated(false);
-        })
-        .catch((error) => {
-          console.error('Error:', error);
-          setToastMessage('Failed to send message. Please try again.');
-          setShowToast(true);
-        });
-    }
+      });
 
-    setValidated(true);
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      const responseData = await response.json();
+      setToastMessage(responseData.message || 'Message sent!');
+      setShowToast(true);
+      form.reset();
+      setValidated(false);
+    } catch (error) {
+      console.error('Error:', error);
+      setToastMessage('Failed to send message. Please try again.');
+      setShowToast(true);
+    }
   };
 
   return (
@@ -67,11 +86,24 @@ const Contact: React.FC = () => {
       id='contact'
       fluid
       className='contact-section min-vh-100 d-flex align-items-center justify-content-center'
+      ref={ref}
     >
-      <div className='content-area'>
+      <motion.div
+        className='content-area'
+        initial={{ opacity: 0, y: 20 }}
+        animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+        transition={{ duration: 1 }}
+      >
         <Row>
           <Col xs={12}>
-            <h1 className='text-center'>Contact</h1>
+            <motion.h1
+              className='text-center'
+              initial={{ opacity: 0, y: -50 }}
+              animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: -50 }}
+              transition={{ duration: 1 }}
+            >
+              Contact
+            </motion.h1>
           </Col>
         </Row>
         <Form
@@ -82,14 +114,19 @@ const Contact: React.FC = () => {
         >
           <Form.Group className='mb-3'>
             <FontAwesomeIcon icon={faUser} className='input-icon' />
-            <Form.Control type='text' placeholder='Name' required />
+            <Form.Control type='text' name='name' placeholder='Name' required />
             <Form.Control.Feedback type='invalid'>
               Please enter your name.
             </Form.Control.Feedback>
           </Form.Group>
           <Form.Group className='mb-3'>
             <FontAwesomeIcon icon={faEnvelope} className='input-icon' />
-            <Form.Control required type='email' placeholder='Email' />
+            <Form.Control
+              required
+              type='email'
+              name='email'
+              placeholder='Email'
+            />
             <Form.Control.Feedback type='invalid'>
               Please enter a valid email address.
             </Form.Control.Feedback>
@@ -99,6 +136,7 @@ const Contact: React.FC = () => {
             <Form.Control
               as='textarea'
               rows={3}
+              name='message'
               placeholder='Message'
               required
             />
@@ -127,7 +165,7 @@ const Contact: React.FC = () => {
             </Col>
           </Row>
         </Form>
-      </div>
+      </motion.div>
       <Footer />
       <ToastContainer position='top-end' className='p-3'>
         <Toast

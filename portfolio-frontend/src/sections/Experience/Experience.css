@@ -1,6 +1,7 @@
 .experience-section {
+    overflow-x: hidden;
     background-color: #2C3E50;
-    color: #fff;
+    color: #FFFFFF;
     padding: 50px 0;
     box-sizing: border-box;
 }
@@ -19,6 +20,7 @@
 .timeline-container {
     position: relative;
     width: 75%;
+    margin: auto;
 }
 
 .timeline-line {
@@ -53,8 +55,8 @@
     width: 40px;
     height: 40px;
     border-radius: 50%;
-    background-color: #fff;
-    border: 2px solid #007bff;
+    background-color: #000000;
+    border: 2px solid #007BFF;
     position: absolute;
     top: 50%;
     z-index: 3;
@@ -75,28 +77,35 @@
 }
 
 .timeline-entry .card {
-    background-color: #F8F9FA;
-    color: #333333;
+    background-color: #22272E;
+    color: #FFFFFF;
     margin-bottom: 20px;
     border: none;
     transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
 }
 
 .timeline-entry .card-header {
-    background-color: #E9EEF1;
-    color: #74b9ff;
+    background-color: #1B1F24;
+    color: #55EFC4;
     border-bottom: none;
     padding: 10px 15px;
     font-size: 1.5rem;
 }
 
+.timeline-entry .card-header .period {
+    font-size: 0.8rem;
+    color: #9CA3AF;
+}
+
 .timeline-entry .card-body {
     padding: 15px;
+    color: #FFFFFF;
+    background-color: #17191C;
 }
 
 .timeline-entry .card-footer {
-    background-color: #E9EEF1;
-    color: #333333;
+    background-color: #1B1F24;
+    color: #FFFFFF;
     border-top: none;
     padding: 10px 15px;
 }
@@ -104,13 +113,6 @@
 .timeline-entry .badge {
     margin-left: 5px;
 }
-
-/*
-.timeline-entry .card:hover {
-    transform: scale(1.03);
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
-} 
-*/
 
 .timeline-entry .card:hover {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
@@ -133,7 +135,7 @@
 .timeline-entry .timeline-connector {
     position: absolute;
     height: 2px;
-    background-color: #007bff;
+    background-color: #007BFF;
     top: 50%;
     transform: translateY(-50%);
     z-index: 2;
@@ -174,6 +176,96 @@
 
 .company-initials {
     font-size: 1em;
-    color: #007bff;
+    color: #007BFF;
     font-weight: bold;
+}
+
+.tabs {
+    overflow-x: auto;
+    white-space: nowrap;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+.tabs::-webkit-scrollbar {
+    display: none;
+}
+
+.tabs .nav-link {
+    display: inline-block;
+    margin-right: 4px;
+    padding: 8px 14px;
+    cursor: pointer;
+    color: #FFFFFF;
+    background-color: #333;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    border-radius: 4px;
+}
+
+.tabs .nav-link.active {
+    color: #FFFFFF;
+    background-color: #555;
+}
+
+.tabs .nav-link:hover {
+    background-color: #444;
+}
+
+.tabs-container .tab-content {
+    background-color: #17191C;
+    color: #C9D1D9;
+    padding: 30px;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    margin-top: 10px;
+}
+
+.tabs-container .tab-pane h4 {
+    color: #55EFC4;
+    margin-bottom: 15px;
+}
+
+.tabs-container .tab-pane p {
+    font-size: 1rem;
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+.tabs-container .badge {
+    font-size: 0.85rem;
+    padding: 5px 10px;
+}
+
+@media (max-width: 768px) {
+    .timeline-container {
+        width: 100%;
+    }
+
+    .timeline-entry {
+        width: 100%;
+        text-align: center;
+        padding: 0;
+    }
+
+    .timeline-entry.left,
+    .timeline-entry.right {
+        left: 0;
+        padding: 0;
+    }
+
+    .timeline-entry .timeline-circle {
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%) translateY(-50%);
+    }
+
+    .timeline-entry .timeline-connector {
+        display: none;
+    }
+
+    .tabs-container .tab-content {
+        padding: 20px;
+    }
 }

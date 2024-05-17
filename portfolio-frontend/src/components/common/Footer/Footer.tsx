@@ -6,7 +6,7 @@ import { faBolt, faCode } from '@fortawesome/free-solid-svg-icons';
 import { faGithub } from '@fortawesome/free-brands-svg-icons';
 import './Footer.css';
 
-const Footer: React.FC = () => {
+const Footer = () => {
   return (
     <footer className='footer'>
       <Container fluid>
@@ -22,7 +22,7 @@ const Footer: React.FC = () => {
           </Col>
           <Col xs={4} className='footer-content footer-center text-center'>
             <span>
-              <FontAwesomeIcon icon={faCode} /> Built using the MERN Stack
+              <FontAwesomeIcon icon={faCode} /> Built & Designed by Tyler Bloom
             </span>
           </Col>
           <Col xs={4} className='footer-content footer-right text-right'>

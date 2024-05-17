@@ -8,8 +8,10 @@ import {
   OverlayTrigger,
   Badge,
 } from 'react-bootstrap';
+import { motion } from 'framer-motion';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faJsSquare } from '@fortawesome/free-brands-svg-icons';
+import { useInView } from 'react-intersection-observer';
 import profilePic from '../../assets/images/me.jpg';
 import iconMapping from './iconMapping';
 import './About.css';
@@ -23,6 +25,7 @@ interface Skill {
 interface Profile {
   introduction: string;
   bio: string;
+  extraBio: string;
   coreSkills: Skill[];
   otherSkills: string[];
 }
@@ -44,18 +47,27 @@ const ProgressBar: React.FC<ProgressBarProps> = ({ experience }) => (
   </RBProgressBar>
 );
 
-const About: React.FC = () => {
+const About = () => {
   const [profile, setProfile] = useState<Profile | null>(null);
+  const { ref, inView } = useInView({
+    triggerOnce: true,
+    threshold: 0.1,
+  });
 
   useEffect(() => {
     const apiUrl = process.env.REACT_APP_API_URL;
     const fetchProfile = async () => {
       try {
-        const response = await fetch(`${apiUrl}/api/profile`);
+        const response = await fetch(`${apiUrl}/profile`, {
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        });
         if (!response.ok) {
           throw new Error(`HTTP error! Status: ${response.status}`);
         }
-        const data: Profile = await response.json();
+        const result = await response.json();
+        const data = JSON.parse(result.body);
         setProfile(data);
       } catch (error) {
         console.error('Error fetching profile data:', error);
@@ -78,26 +90,63 @@ const About: React.FC = () => {
       id='about'
       fluid
       className='about-section min-vh-100 d-flex flex-column justify-content-center align-items-center'
+      ref={ref}
     >
       <Row>
         <Col xs={12}>
-          <h1 className='about-header'>About Me</h1>
+          <motion.h1
+            className='about-header'
+            initial={{ opacity: 0, y: -50 }}
+            animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: -50 }}
+            transition={{ duration: 1 }}
+          >
+            About Me
+          </motion.h1>
         </Col>
       </Row>
-      <Row className='mt-5'>
+      <Row className='content-row'>
         <Col md={2} className='text-end'>
-          <img
+          <motion.img
             src={profilePic}
             alt='Profile'
             className='img-fluid rounded-circle profile-pic'
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={
+              inView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.8 }
+            }
+            transition={{ duration: 1 }}
           />
         </Col>
-        <Col md={4} style={{ paddingRight: '50px' }}>
-          <h3>{profile?.introduction || 'Get to know me!'}</h3>
-          <p>{profile?.bio}</p>
+        <Col md={4} className='profile-col'>
+          <motion.h3
+            initial={{ opacity: 0, x: -50 }}
+            animate={inView ? { opacity: 1, x: 0 } : { opacity: 0, x: -50 }}
+            transition={{ duration: 1, delay: 0.2 }}
+          >
+            {profile?.introduction || 'Get to know me!'}
+          </motion.h3>
+          <motion.p
+            initial={{ opacity: 0 }}
+            animate={inView ? { opacity: 1 } : { opacity: 0 }}
+            transition={{ duration: 1, delay: 0.4 }}
+          >
+            {profile?.bio}
+          </motion.p>
+          <motion.p
+            initial={{ opacity: 0 }}
+            animate={inView ? { opacity: 1 } : { opacity: 0 }}
+            transition={{ duration: 1, delay: 0.6 }}
+          >
+            {profile?.extraBio}
+          </motion.p>
         </Col>
-        <Col md={6} style={{ paddingLeft: '50px' }}>
-          <div className='about-skills'>
+        <Col md={6} className='skills-col'>
+          <motion.div
+            className='about-skills'
+            initial={{ opacity: 0, x: 50 }}
+            animate={inView ? { opacity: 1, x: 0 } : { opacity: 0, x: 50 }}
+            transition={{ duration: 1, delay: 0.8 }}
+          >
             <h3>Core Skills</h3>
             <div className='skill-set'>
               {profile?.coreSkills.map((skill, index) => (
@@ -120,15 +169,20 @@ const About: React.FC = () => {
                 </OverlayTrigger>
               ))}
             </div>
-          </div>
-          <div className='other-skills'>
+          </motion.div>
+          <motion.div
+            className='other-skills'
+            initial={{ opacity: 0, y: 50 }}
+            animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
+            transition={{ duration: 1, delay: 1 }}
+          >
             <h4>Other Skills</h4>
             {profile?.otherSkills.map((skill, index) => (
               <Badge pill bg='secondary' className='m-1' key={index}>
                 {skill}
               </Badge>
             ))}
-          </div>
+          </motion.div>
         </Col>
       </Row>
     </Container>
