@@ -4,7 +4,7 @@ Welcome to my personal portfolio website, showcasing my professional milestones,
 
 ## About
 
-This Single Page Application (SPA) portfolio is built using the MERN stack for initial development and testing. It has been transitioned to utilize AWS services, including API Gateway and Lambda functions, to fetch data from an S3 bucket. The website features a responsive design and interactive UI components, highlighting my work as a Software Engineer.
+This Single Page Application (SPA) portfolio is built using the MERN stack for initial development and testing. It has been transitioned to utilize AWS services, including API Gateway and Lambda functions to fetch data from an S3 bucket. The website features a responsive design and interactive UI components, highlighting my work as a Software Engineer.
 
 ## Features
 
